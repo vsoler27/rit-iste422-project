@@ -1,0 +1,14 @@
+all : clean test run
+
+clean :
+	rm -f build/*.class
+
+test : compile
+	java -cp ./build/:lib/junit-4.12.jar:lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore EdgeConnectorTest
+
+compile : 
+	javac -d ./build -cp lib/junit-4.12.jar:lib/hamcrest-core-1.3.jar:./src/main src/main/*.java src/test/java/*.java
+
+run : compile
+	java -cp ./build/ RunEdgeConvert
+
